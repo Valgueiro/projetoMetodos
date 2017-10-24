@@ -1,26 +1,31 @@
 from __future__ import division
 from sympy import * 
-
+y, t, x = symbols('y t x');
 
 def euler(expr): 
-    t0 = int(input("Digite o numero correspondente a T0:"))
-    y0 = int(input("Digite o numero correspondente a y0:"))
-    h = int(input("Digite o numero correspondente ao tamanho dos passos:"))
-    n = int(input("Digite o numero correspondente ao numero de passos:"))
+    t0 = float(input("Digite T0:"))
+    y0 = float(input("Digite y0:"))
+    h = float(input("Digite o tamanho dos passos:"))
+    n = int(input("Digite o numero de passos:"))
+    print ("T = " + str(t0) + "   F(y,t) = " + str(y0))
+    
+    yNow = y0
+    tNow = t0
 
     for j in range(1, n):
-        res = expr.subs([y, n], [t, tAux])
-        print (res)
+        derivate = expr.subs([(y, yNow), (t, tNow)])
+        yNow += h*derivate
+        tNow += h
+        if(j%(0.1/h)==0):
+            print ("T = " + str(tNow) + "   Y = " + str(yNow));
+
+    #print("Final value to y(t)")
     return
 
 def main():
-    y, t, x = symbols('y t x');
-    str_expr = input("Digite sua F(y,t):\n");
-    expr = sympify(str_expr);
-    
-    res = expr.subs([(y, 1), (t, 3)]);
-    print ("Para F(1,3):");
-    print (res);
+    str_expr = input("Digite sua F(y,t):\n")
+    expr = sympify(str_expr)
+    euler(expr)
 
 
 if __name__ == "__main__":
