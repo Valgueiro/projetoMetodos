@@ -1,14 +1,17 @@
+# -*- coding: utf-8 -*-
 from __future__ import division
+import matplotlib.pyplot as plt
 from sympy import * 
 y, t, x = symbols('y t x');
 
 def F(expr, yn, tn):
     return expr.subs([(y, yn), (t, tn)])
 
-
-def euler(expr, t0, y0, h, n):     
+def euler(expr, t0, y0, h, n):     #ok
     print ("T = " + str(t0) + "   Y = " + str(y0))
     
+    vEulerx = []
+    vEulery = []
     yNow = y0
     tNow = t0
 
@@ -17,6 +20,8 @@ def euler(expr, t0, y0, h, n):
         tNow += h
         if(j%(0.1/h)==0):
             print ("T = " + str(tNow) + "   Y = " + str(yNow));
+            vx.append(tNow)
+            vy.append(yNow)
 
     return
 
@@ -27,12 +32,12 @@ def eulerInverso(expr, t0, y0, h, n):
     tNow = t0
 
     for j in range(1, n):
-        Fn = F(expr, yNow, tNow)
-        yNext = yNow + h*Fn
-        tNext = tNow+h
-         
-        yNow += h*F(expr,  yNext, tNext)
-        tNow += h
+        tNow = tNow+h
+        Fop =+ yNow + h*F(expr, y, tNow) 
+        fn = Eq(Fop, y)
+        
+        yNow = solve(fn,y).pop()
+
         if(j%(0.1/h)==0):
             print ("T = " + str(tNow) + "   Y = " + str(yNow));
 
@@ -68,10 +73,26 @@ def main():
     t0 = float(input("Digite T0:"))
     y0 = float(input("Digite y0:"))
     h = float(input("Digite o tamanho dos passos:"))
-    n = int(input("Digite o numero de passos:"))
+    tf = float(input("Digite a variável t que você deseja calcular f(t):"))
+    
+    #------ Apenas para testes =------
+    # expr = sympify("1 - t + 4 * y");
+    # t0 = 0
+    # y0 = 1
+    # tf = 2
+    # h = 0.025    
+
+    # n = int((tf-t0)/h) + 1
     
     print("Valores calculados por Euler simples:\n");
     euler(expr, t0, y0, h, n)
+
+    # plt.plot(vx, vy, 'go')
+    # plt.plot(vx, vy, 'k:', color='blue')
+    # plt.title("Euler")
+    # plt.xlabel("t")
+    # plt.ylabel("y")
+    # plt.show()
 
     print("\nValores calculados por Euler inverso:\n");
     eulerInverso(expr, t0, y0, h, n)
