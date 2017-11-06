@@ -89,7 +89,7 @@ def main():
     # str_expr = input("Digite sua expressao:\n")
     # expr = lambdify((t,y), solve(sympify(str_expr), g).pop());
     # print(str(expr))
-    #return
+
     
     print("Digite o metodo que você deseja calcular:")
     print("1 - Euler Simples")
