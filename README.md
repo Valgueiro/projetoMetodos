@@ -4,10 +4,10 @@ Todas as aplicações dos Métodos Númericos feitos por Mateus Valgueiro (mvt@c
 ## Informações Gerais
 Essas instruções irão ajudar em como compilar e executar o código presente neste repositório.
 
-### Dependências:
+### Dependências
 Para rodar este programa você deve estar em um ambiente ***Linux*** e com a biblioteca [Simpy](http://docs.sympy.org/latest/install.html) e [MatplotLib](https://matplotlib.org/users/installing.html) instaladas em ssua máquina.
 
-### Compilando e rodando
+### Executando o código
 Assim, quando quiser executá-lo, com todas as dependências devidamente instaladas, você deve rodar o comando: 
 ```
 $ python metodos.py
