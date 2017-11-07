@@ -10,7 +10,7 @@ Para rodar este programa você deve estar em um ambiente ***Linux*** e com a bib
 ### Executando o código
 Assim, quando quiser executá-lo, com todas as dependências devidamente instaladas, você deve rodar o comando: 
 ```
-$ python metodos.py
+$ python3 metodos.py
 ```
 
 
