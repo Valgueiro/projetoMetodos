@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-import matplotlib as plt
+import matplotlib.pyplot as plt
 from sympy import * 
-y, t, x, g = symbols('y t x g');
+
+y, t, x = symbols('y t x');
 
 vx = []
 vy = []
@@ -88,10 +89,12 @@ def euler(expr, t0, y0, h, n):
     for j in range(1, n):
         yNow += h*F(expr, yNow, tNow)
         tNow += h
+        vx.append(tNow)
+        vy.append(yNow)
+        
         if(j%(0.1/h)==0):
             print ("T = " + str(tNow) + "   Y = " + str(yNow));
-            vx.append(tNow)
-            vy.append(yNow)
+            
 
     return
 
@@ -107,6 +110,9 @@ def eulerInverso(expr, t0, y0, h, n):
         fn = Eq(Fop, y)
         
         yNow = solve(fn,y).pop()
+
+        vx.append(tNow)
+        vy.append(yNow)
 
         if(j%(0.1/h)==0):
             print ("T = " + str(tNow) + "   Y = " + str(yNow));
@@ -127,6 +133,9 @@ def eulerModificado(expr, t0, y0, h, n):
         
         yNow += h*diff
         tNow += h
+
+        vx.append(tNow)
+        vy.append(yNow)
         
         if(j%(0.1/h)==0):
             print ("T = " + str(tNow) + "   Y = " + str(yNow));
@@ -151,14 +160,15 @@ def rk(expr, t0, y0, h, n, fromAdams):
         yNow = yNow + Ftotal
         tNow = tNow+h
 
+        vx.append(tNow)
+        vy.append(yNow)
         if(fromAdams):
             calculatedF.append((yNow, tNow))
                  
         if(j%(0.1/h)==0):
             print ("T = " + str(tNow) + "   Y = " + str(yNow));
 
-    print(calculatedF)
-    print(calculatedF[1][0])
+   
     return
 
 def adamsBashforth(expr, t0, y0, h, n, grau):
@@ -213,26 +223,28 @@ def main():
     y0 = 1
     tf = 2
     h = 0.05   
-    method = 5;
+    method = 4;
 
     n = int((tf-t0)/h) + 1
+    vx.append(t0)
+    vy.append(y0)
     
     if (method == 1):
         print("Valores calculados por Euler simples:\n");
         euler(expr, t0, y0, h, n)
-        #plt.title("Euler Simples")
+        plt.title("Euler Simples")
     elif (method == 2):
         print("\nValores calculados por Euler inverso:\n");
         eulerInverso(expr, t0, y0, h, n)
-       # plt.title("Euler Inverso")
+        plt.title("Euler Inverso")
     elif (method == 3):
         print("\nValores calculados por Euler modificado:\n");
         eulerModificado(expr, t0, y0, h, n)
-        #plt.title("Euler Modificado")
+        plt.title("Euler Modificado")
     elif (method == 4):
         print("\nValores calculados por Runge-Kutta:\n");
         rk(expr, t0, y0, h, n, 0)
-        #plt.title("Runge-Kutta")
+        plt.title("Runge-Kutta")
     elif (method == 5):
         #grau = int(input("Digite o grau:\n"))
         grau = 4;
@@ -245,12 +257,11 @@ def main():
         adamsMoulton(expr, t0, y0, h, n, grau)
         #plt.title("Adams-Moulton") 
         
-    # plt.plot(vx, vy, 'go')
-    # plt.plot(vx, vy, 'k:', color='blue')
-    # 
-    # plt.xlabel("t")
-    # plt.ylabel("y")
-    # plt.show()
+    plt.xlabel("t")
+    plt.ylabel("y")     
+    plt.plot(vx, vy, 'go')
+    plt.plot(vx, vy, 'k:', color='blue')
+    plt.show()
     
 
 if __name__ == "__main__":
