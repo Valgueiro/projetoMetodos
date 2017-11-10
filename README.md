@@ -24,7 +24,9 @@ Digite o metodo que você deseja calcular:
 1 - Euler Simples                                                                                  
 2 - Euler Inverso                                 
 3 - Euler Modificado               
-4 - Runge-Kutta                                     
+4 - Runge-Kutta     
+5 - Adams-Bashforth
+6 - Adams-Moulton                               
 Sua escolha:  
 ```
 
