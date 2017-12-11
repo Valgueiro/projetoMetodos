@@ -271,8 +271,7 @@ def main():
         rk(expr, t0, y0, h, n, 0)
         plt.title("Runge-Kutta")
     elif (method == 5):
-        #grau = int(input("Digite o grau:\n"))
-        grau = 4;
+        grau = int(input("Digite o grau:\n"))
         print("\nValores calculados por Adams-Bashforth:\n");
         adamsBashforth(expr, t0, y0, h, n, grau)
         plt.title("Adams-Bashforth")
