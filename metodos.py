@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
 import matplotlib
+import matplotlib.pyplot as plt
 from sympy import * 
-matplotlib.use('Agg')
 y, t, x = symbols('y t x');
 
 #globals:
-plt = matplotlib.pyplot
 vx = []
 vy = []
 calculatedF = []
